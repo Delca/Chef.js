@@ -1,0 +1,252 @@
+Fizzbuzz cookies.
+
+Maybe you wanna prove to people that you can display basic programming skills? If so, you may be asked to perform the FizzBuzz test.
+Here is an implementation of it in using the Chef language, based on the original article
+at http://blog.codinghorror.com/why-cant-programmers-program/ and annotated to help with understanding each line's role.
+
+Ingredients.
+100 g cookie dough
+0 g crispy sugar
+10 ml linear caramel
+
+Method.
+Put linear caramel into mixing bowl.
+Liquefy crispy sugar.
+Fumble the cookie dough.
+Put cookie dough into the 2nd mixing bowl.
+Serve with Glittering Buzz powder.
+Serve with Sparkling Fizz powder.
+Fold crispy sugar into the mixing bowl.
+Put crispy sugar into the mixing bowl.
+Remove linear caramel.
+Fold crispy sugar into the mixing bowl.
+Put crispy sugar into the 2nd mixing bowl.
+Serve with Conditional powder.
+Fold crispy sugar into the 2nd mixing bowl.
+Put linear caramel into mixing bowl.
+Malax the cookie dough until fumbled.
+Pour contents of the mixing bowl into the baking dish.
+
+Serves 1.
+
+
+Lesser sauce.
+// a < b
+
+This sauce is made of two ingredients mixed into the 2nd mixing bowl.
+Its result depends on the ingredients' quantities: if the top ingredient is strictly greater than the next-to-top one, it will return a bowl containing one unit of sauce. Else, 0 unit of sauce will be returned in that bowl.
+
+Ingredients.
+100 ml water
+0 g leftie clover
+0 g rightie sugar
+1 g special sauce
+
+Method.
+Fold the rightie sugar into the 2nd mixing bowl.
+Fold the leftie clover into the 2nd mixing bowl.
+// if l - r == 0 && r - l == 0, l and r are the same thing, return 0
+Put rightie sugar into mixing bowl.
+Remove leftie clover.
+Fold water into mixing bowl.
+Put leftie clover into mixing bowl.
+Remove rightie sugar.
+Add water.
+Boil the water.
+// From now on, we know that our two ingredients have different quantities
+// if r - l == 0, l > r and we shall return 0
+Put rightie sugar into mixing bowl.
+Remove leftie clover.
+Fold water into mixing bowl.
+Flavour the water.
+// Else, we can just return 1
+Clean the mixing bowl.
+Add special sauce.
+Refrigerate.
+Keep stiring until flavoured.
+Set aside.
+Keep watch until boiled.
+// l - r == 0 && r - l == 0, l and r are the same thing, return 0
+Clean the mixing bowl.
+Add water.
+
+
+Equally lesser sauce.
+// a <= b
+
+This sauce is made of two ingredients mixed into the 2nd mixing bowl.
+This sauce is a more evenly-distributed variant of the lesser sauce, which will return one unit of sauce even if the two ingredients are present in the same quantities.
+
+Ingredients.
+100 ml water
+0 g leftie clover
+0 g rightie sugar
+1 g special sauce
+0 g nil powder
+
+Method.
+Fold the rightie sugar into the 2nd mixing bowl.
+Fold the leftie clover into the 2nd mixing bowl.
+// if l - r == 0 && r - l == 0, l and r are the same thing, return 0
+Put rightie sugar into mixing bowl.
+Remove leftie clover.
+Fold water into mixing bowl.
+// water is now rightie - leftie
+Put leftie clover into mixing bowl.
+Remove rightie sugar.
+Add water.
+Fold water into mixing bowl.
+Boil the water.
+// From now on, we know that our two ingredients have different quantities
+// if r - l == 0, l > r and we shall return 0
+Put rightie sugar into mixing bowl.
+Remove leftie clover.
+Fold water into mixing bowl.
+Flavour the water.
+// Else, we can just return 1
+Clean the mixing bowl.
+Add special sauce.
+Refrigerate.
+Keep stiring until flavoured.
+Clean the mixing bowl.
+Add nil powder.
+Refrigerate.
+Keep watch until boiled.
+// l - r == 0 && r - l == 0, l and r are the same thing, return 0
+Clean the mixing bowl.
+Add special sauce.
+
+
+Superior sauce.
+// a > b
+
+This sauce uses the Lesser sauce as a base to improve upon, and is still made of two ingredients mixed into the 2nd mixing bowl.
+Its result depends on the ingredients' quantities: if the top ingredient is strictly lesser than the next-to-top one, it will return a bowl containing one unit of sauce. Else, 0 unit of sauce will be returned in that bowl.
+
+Ingredients.
+// TODO: ingredients should be optional, and the ingredients header itself should be optional
+0 g dummy ingredient
+
+Method.
+Stir the 2nd mixing bowl for 1 minute.
+Clean the mixing bowl.
+Serve with Lesser sauce.
+
+
+Equally superior sauce.
+// a >= b
+
+This sauce is made of two ingredients mixed into the 2nd mixing bowl.
+This sauce is a more evenly-distributed variant of the superior sauce, which will return one unit of sauce even if the two ingredients are present in the same quantities.
+
+Ingredients.
+// TODO: ingredients should be optional, and the ingredients header itself should be optional
+0 g dummy ingredient
+
+Method.
+Stir the 2nd mixing bowl for 1 minute.
+Clean the mixing bowl.
+Serve with Equally lesser sauce.
+
+
+Chocolated modulo.
+// a % b    a.k.a.   bits % shreds
+
+This sweet recipe may just blow you to bits and bites!
+Taking just the two top arguments from the 2nd mixing bowl, it will smash the next-to-top one against the other, ensuring that its quantity is strictly less than the top one by successively removing the quantity of the top one from the next-to-top ingredient.
+The resulting second ingredient will then be returned in the first mixing bowl.
+
+Ingredients.
+100 g chocolate
+0 g bits
+0 g shreds
+
+Method.
+Fold shreds into the 2nd mixing bowl.
+Fold bits into the 2nd mixing bowl.
+Put shreds into the 2nd mixing bowl.
+Put bits into the 2nd mixing bowl.
+Serve with equally lesser sauce.
+Fold the chocolate into mixing bowl.
+Boil the chocolate.
+Remove shreds from the 2nd mixing bowl.
+Fold bits into the 2nd mixing bowl.
+Fold chocolate into the 2nd mixing bowl.
+Put bits into the 2nd mixing bowl.
+Serve with equally lesser sauce.
+Fold the chocolate into mixing bowl.
+Keep watch until boiled.
+Clean the mixing bowl.
+Put bits into mixing bowl.
+
+
+Sparkling Fizz powder.
+
+This recipe will make a deliciously sparkling Fizz powder to accomodate the most special of your recipes!
+Looking at the top ingredient of the 2nd mixing bowl, it will display a nice "Fizz" if the ingredient can be cut into groups of three without leaving anything behind.
+Note that this recipe does not include any line return after the "Fizz" it may display.
+
+Ingredients.
+3 ml water
+70 g flour
+105 g iridescent powder
+122 g zephyr colourant
+
+Method.
+Clean the mixing bowl.
+Put water into the 2nd mixing bowl.
+Serve with chocolated modulo.
+Fold water into mixing bowl.
+Boil the water.
+Refrigerate.
+Keep watching until boiled.
+Put zephyr colourant into mixing bowl.
+Put zephyr colourant into mixing bowl.
+Put iridescent powder into mixing bowl.
+Put flour into mixing bowl.
+Liquefy contents of the mixing bowl.
+
+
+Glittering Buzz powder.
+
+This recipe will make a deliciously glittering Buzz powder to accomodate the most special of your recipes!
+Looking at the top ingredient of the 2nd mixing bowl, it will display a nice "Buzz" if the ingredient can be cut into groups of five without leaving anything behind.
+Note that this recipe does not include any line return after the "Buzz" it may display.
+
+Ingredients.
+5 ml water
+66 g berries
+117 g ultimate powder
+122 g zephyr colourant
+
+Method.
+Clean the mixing bowl.
+Put water into the 2nd mixing bowl.
+Serve with chocolated modulo.
+Fold water into mixing bowl.
+Boil the water.
+Refrigerate.
+Keep watching until boiled.
+Put zephyr colourant into mixing bowl.
+Put zephyr colourant into mixing bowl.
+Put ultimate powder into mixing bowl.
+Put berries into mixing bowl.
+Liquefy contents of the mixing bowl.
+
+
+Conditional powder.
+
+This recipe will give some nice conditional powder to sprinkle on top of your favourite recipes.
+Looking at the top two ingredients of your 2nd mixing bowl, it will return you the second one if and only if the quantity of the top one is 0.
+
+Ingredients.
+0 g base powder
+
+Method.
+Clean the mixing bowl.
+Fold the base powder into the 2nd mixing bowl.
+Sift the base powder.
+Refrigerate.
+Keep going until sifted.
+Fold the base powder into the 2nd mixing bowl.
+Put base powder into the mixing bowl.
