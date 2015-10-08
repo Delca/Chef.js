@@ -5,6 +5,7 @@ Chef.js is an effort to implement a JavaScript interpreter for the Chef programm
 Parsing the recipe was done by writing a context-free grammar representing the language, then using [Jison](https://github.com/zaach/jison) to create a parser from that grammar.
 
 [Chef's specifications](http://www.dangermouse.net/esoteric/chef.html) were originally described by David Morgan-Mar.
+The [helloWorld.chf](https://github.com/Delca/Chef.js/blob/master/samples/helloWorld.chf) was also taken [from his website](http://www.dangermouse.net/esoteric/chef_hello.html).
 
 Although the goal is to stay as close as possible to the original, the behaviour is not guaranteed to always match this document.
 As a result, the *Fibonacci Numbers with Caramel Sauce* recipe offered with the specifications does not work with this interpreter.
