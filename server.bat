@@ -1,0 +1,1 @@
+U:\Users\Delca\AppData\Roaming\npm\http-server.cmd

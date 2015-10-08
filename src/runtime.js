@@ -1,8 +1,11 @@
 var ast = require('./ast')
 var fs = require('fs');
-var chefParser = require('../chef');
-var readline = require('readline');
-var stream = require('stream');
+// Fix for the web
+//var chefParser = require('../chef');
+
+// Fix for the web
+ast = module.exports;
+// END Fix for the web
 
 var ASTNode = ast.ASTNode;
 var NodeType = ast.NodeType;
@@ -97,7 +100,7 @@ WorkSpace.prototype.toString = function() {
 	str += 'Ingredients\n';
 	if (this.ingredients.length > 0) {
 		for (var i = 0; i < this.ingredients.length; ++i) {
-			str += '- ' + this.ingredients[i] + '\n';
+			str += '- ' + this.ingredients[i].toString() + '\n';
 		}
 	}
 	else {
@@ -127,6 +130,104 @@ WorkSpace.prototype.toString = function() {
 
 	
 	str += '\n';
+	
+	return str;
+}
+
+WorkSpace.prototype.toHTMLTable = function() {
+	var str = '-- Workspace --\n\n';
+	
+	str = '';
+	if (this.ingredients.length > 0) {
+		for (var i = 0; i < this.ingredients.length; ++i) {
+			str += '<tr><td>' + this.ingredients[i].toHTMLElement() + '</td></tr>';
+		}
+	}
+	else {
+		str += '<tr><td>No ingredients here.</td></tr>'
+	}
+	document.getElementById("ingredientsTable").innerHTML = str;
+
+	str = '';
+	bowls = [];
+	var maxIngr = 0;
+	for (var i = 0; i < this.bowls.length; ++i) {
+		if (this.bowls[i] + '' === 'undefined') continue;
+		maxIngr = Math.max(maxIngr, this.bowls[i].length);
+	}
+	
+	str='<th>#</th>';
+	for (var i = 1; i < this.bowls.length; ++i) {
+		if (this.bowls[i] + '' !== 'undefined') {
+			str += '<th>Bowl ' + (i) + '</th>';
+		}
+		else {
+			str += '<th>NO Bowl ' + (i) +'</th>';
+		}
+	}
+	for (var j = maxIngr - 1; j >= 0; --j)
+	{
+		str += '<tr> <th>' + (j+1) + '</th>';
+		for (var i = 1; i < this.bowls.length; ++i) {
+			if (this.bowls[i] + '' !== 'undefined' && j < this.bowls[i].length) {
+				var colour = (this.bowls[i][j].state?"success":"primary");
+				var hover = (this.bowls[i][j].state?"Solid":"Liquid");
+				str += '<td><span title="' + hover + '" class="label label-' + colour + '" style="border-radius: 1em;">' + this.bowls[i][j].quantity + '</span> ' + this.bowls[i][j].id + '</td>';
+			}
+			else {
+				str += '<td></td>';
+			}
+		}
+		str += '</tr>';
+	}
+	
+	document.getElementById("bowlsTable").innerHTML = str;
+
+	str = '';
+	for(var i = 0; i < this.dishes.length; ++i) {
+		if (this.dishes[i] + '' === 'undefined') continue;
+		str += 'Dish ' + i + ': [';
+		for(var j = 0; j < this.dishes[i].length; ++j) 
+			str += (j>0?', ':'') + this.dishes[i][j].quantity + (this.dishes[i][j].state?'':'l');
+		str += ']\n';
+	}
+	
+	// DISH display
+	dishes = [];
+	var maxIngr = 0;
+	for (var i = 0; i < this.dishes.length; ++i) {
+		if (this.dishes[i] + '' === 'undefined') continue;
+		maxIngr = Math.max(maxIngr, this.dishes[i].length);
+	}
+	
+	str='<th>#</th>';
+	for (var i = 1; i < this.dishes.length; ++i) {
+		if (this.dishes[i] + '' !== 'undefined') {
+			str += '<th>Dish ' + (i) + '</th>';
+		}
+		else {
+			str += '<th>NO Dish ' + (i) +'</th>';
+		}
+	}
+	for (var j = maxIngr - 1; j >= 0; --j)
+	{
+		str += '<tr> <th>' + (j+1) + '</th>';
+		for (var i = 1; i < this.dishes.length; ++i) {
+			if (this.dishes[i] + '' !== 'undefined' && j < this.dishes[i].length) {
+				var colour = (this.dishes[i][j].state?"success":"primary");
+				var hover = (this.dishes[i][j].state?"Solid":"Liquid");
+				str += '<td><span title="' + hover + '" class="label label-' + colour + '" style="border-radius: 1em;">' + this.dishes[i][j].quantity + '</span> ' + this.dishes[i][j].id + '</td>';
+			}
+			else {
+				str += '<td></td>';
+			}
+		}
+		str += '</tr>';
+	}
+	
+	document.getElementById("dishesTable").innerHTML = str;
+
+	str = '';
 	
 	return str;
 }
@@ -261,7 +362,9 @@ WorkSpace.prototype.printDish = function(dishNum) {
 		}
 	}
 	
-	process.stdout.write(buffer);
+	// Fix for the web
+	//process.stdout.write(buffer);
+	writeDishToOutput(buffer);
 }
 
 WorkSpace.prototype.printDishes = function(num) {
@@ -280,7 +383,13 @@ function Ingredient(id, quantity, state)
 }
 
 Ingredient.prototype.toString = function() {
-	return this.id + ' (' + this.state?"solid":"liquid" + '): ' + this.quantity; 
+	return this.id + ' (' + (this.state?"solid":"liquid") + '): ' + this.quantity; 
+}
+
+Ingredient.prototype.toHTMLElement = function() {
+	var colour = (this.state?"success":"primary");
+	var hover = (this.state?"Solid":"Liquid");
+	return '<span title="' + hover + '" class="label label-' + colour + '" style="border-radius: 1em;">' + this.quantity + '</span> ' + this.id; 
 }
 
 // By convention, we will only execute the first recipe from the list
@@ -624,7 +733,7 @@ return exePoint;
 
 
 // -- EXECUTION --
-
+/*
 //console.log('Parsing ' + process.argv[2] + ' ...');
 file = fs.readFileSync(process.argv[2], 'utf-8');
 // Manual fix to prevent Windows user from
@@ -640,4 +749,4 @@ var myWorkspace = new WorkSpace(fileAst);
 //console.log('' + myWorkspace);
 executeRecipe(fileAst, myWorkspace);
 //console.log('' + myWorkspace);
-
+*/

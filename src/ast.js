@@ -77,6 +77,8 @@ module.exports.NodeType = NodeType;
 module.exports.NodeSubtype = NodeSubtype;
 module.exports.isDry = isDry;
 
+ast = module.exports;
+
 
 
 

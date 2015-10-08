@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<link href="web/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+<script src="web/js/jQuery.min.js"></script>
+<script src="web/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" >
+	var module = {exports: {}};
+	var require = function(){};
+</script>
+<script src="src/ast.js"></script>
+<script src="src/chef.js"></script>
+<script src="src/runtime.js"></script>
+
+<script>
+function runProgram()
+{
+//alert(document.getElementById("sourceRecipe").value);
+
+file = ''
+file = document.getElementById("sourceRecipe").value
+// Manual fix to prevent Windows user from
+// crashing the compiler simply by using it.
+file = file.replace(/\r\n/g, '\n');
+var fileAst = chefParser.parse(file);
+
+//console.log('Executing ' + process.argv[2] + ' ...');
+var myWorkspace = new WorkSpace(fileAst);
+
+//process.stdout.write('Parsed and ready to execute !');
+//process.exit(0);
+//console.log('' + myWorkspace);
+executeRecipe(fileAst, myWorkspace);
+console.log('' + myWorkspace);
+myWorkspace.toHTMLTable();
+
+}
+
+function writeDishToOutput(buffer){
+document.getElementById("consoleOutput").value = document.getElementById("consoleOutput").value + buffer;
+}
+function clearOutput() {
+document.getElementById("consoleOutput").value = '';
+
+document.getElementById("ingredientsTable").innerHTML = '<tr><td>No ingredients here.</td></tr>';
+document.getElementById("bowlsTable").innerHTML = '<tr><th>#</th></tr>';
+document.getElementById("dishesTable").innerHTML = '<tr><th>#</th></tr>';
+
+}
+function loadSample(fileName) {
+$.get(
+"samples/" + fileName + ".chf",
+{},
+function(data){
+	document.getElementById("sourceRecipe").value = data
+}
+);
+}
+window.onload = function(){
+	clearOutput();
+	loadSample("helloWorld");
+}
+
+</script>
+
+</head>
+
+<body style="background-color: #EE9900;">
+
+<a href="https://github.com/Delca/Chef.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+<div class="container">
+  <h1>Chef.js</h1>
+  <div class="row">
+  <p class="well col-md-6">
+     An interpreter for the Chef programming language<br>
+     Still in early pre-alpha testing<br>
+	 Specifications inspired by <a href="http://www.dangermouse.net/esoteric/chef.html">David Morgan-Mar's Chef language</a><br>
+     Made using <a href="http://jison.org">Jison</a> (available on <a href="https://github.com/zaach/jison">GitHub</a>)</p>
+  </div>
+	 
+<!-- Program text area, buttons and console output -->
+<div class="row">
+  <div class="col-md-6"><h3>Recipe</h3><textarea id="sourceRecipe" rows="15" style="width: 100%;"></textarea> </div>
+  
+  <div class="col-md-2" style="text-align: center;">
+    <h3>Commands</h3>
+    <div><button class="btn btn-success" onclick="runProgram();">Run</button></div>
+	<div><button class="btn btn-danger" onclick="clearOutput();" style="margin-top: 1em;">Clear</button></div>
+    <div><button class="btn btn-info" onclick="loadSample('helloWorld')" style="margin-top: 1em;">HelloWorld</button></div>
+    <div><button class="btn btn-info" onclick="loadSample('fizzbuzz')" style="margin-top: 1em;">FizzBuzz</button></div>
+  </div>
+  
+  <div class="col-md-4"><h3>Output</h3><textarea id="consoleOutput" rows="15" style="width: 100%;" readonly="true"></textarea></div>
+</div>
+
+<!-- Bowls and baking plates -->
+<div class="row">
+
+<div class="col-md-2">
+<h3>Ingredients</h3>
+
+<table id="ingredientsTable" class="table table-striped">
+  <tr><td>No ingredients here.</td></tr>
+</table>
+
+</div>
+
+<div class="col-md-5">
+<h3>Bowls</h3>
+<table id="bowlsTable" class="table table-striped">
+  <tr><th>#</th></tr>
+</table>
+</div>
+
+<div class="col-md-5">
+<h3>Dishes</h3>
+<table id="dishesTable" class="table table-striped">
+  <tr><th>#</th></tr>
+</table>
+</div>
+
+</div>
+
+</div>
+
+
+
+
+</body>
+
+</html>
